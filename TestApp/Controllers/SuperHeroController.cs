@@ -16,6 +16,7 @@ namespace TestApp.Controllers
         /// <returns>All heroes</returns>
         /// <response code="200">Returns all heroes</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<SuperHero>>> Get()
         {         
             return Ok(await _mediator.Send(new GetAllHeroesQuery()));
@@ -25,6 +26,8 @@ namespace TestApp.Controllers
         /// <response code="200">Returns the SuperHero found by id</response>
         /// <response code="400">If hero not found</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<SuperHero>> Get(int id)
         {
             var hero = await _mediator.Send(new FindHeroByIdQuery(id));
@@ -42,6 +45,7 @@ namespace TestApp.Controllers
         /// <returns>Heroes with newly created</returns>
         /// <response code="201">Returns heroes with newly created</response>      
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<List<SuperHero>>> Post(SuperHero hero)
         {
             var heroes = await _mediator.Send(new AddHeroCommand(hero));
@@ -54,6 +58,8 @@ namespace TestApp.Controllers
         /// <response code="200">Returns heroes with updated hero</response>
         /// /// <response code="400">If hero not found</response>
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<List<SuperHero>>> Put(SuperHero request)
         {
             var result = await _mediator.Send(new UpdateHeroCommand(request));
@@ -72,6 +78,8 @@ namespace TestApp.Controllers
         /// <response code="200">Returns the heroes without deleted</response>
         /// <response code="400">If hero not found</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<List<SuperHero>>> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteHeroCommand(id));
