@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TestApp.Models;
-
-namespace TestApp.Data
+﻿namespace TestApp.Data
 {
     public class DataContext : DbContext
     {
