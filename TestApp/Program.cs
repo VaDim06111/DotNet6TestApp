@@ -1,5 +1,6 @@
+using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
-using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,13 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(options =>
+    {
+        options.ImplicitlyValidateChildProperties = true;
+        options.ImplicitlyValidateRootCollectionElements = true;
+        options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+    });
 
 // Add db connection
 builder.Services.AddDbContext<DataContext>(options =>
@@ -21,8 +28,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 // Add MediatR
-var assembly = AppDomain.CurrentDomain.Load("TestApp");
-builder.Services.AddMediatR(assembly);
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IMediator, Mediator>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -65,6 +71,8 @@ app.UseHttpsRedirection();
 app.UseCors();
 
 app.UseAuthorization();
+
+app.UseStatusCodePages();
 
 app.MapControllers();
 
