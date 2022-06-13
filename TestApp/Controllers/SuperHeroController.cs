@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TestApp.Controllers
 {
@@ -24,10 +25,12 @@ namespace TestApp.Controllers
 
         /// <returns>A SuperHero find by id</returns>
         /// <response code="200">Returns the SuperHero found by id</response>
+        /// <response code="400">If ModelState is invalid</response>
         /// <response code="404">If hero not found</response>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(400, Type = typeof(ValidationProblemDetails))]
+        [ProducesResponseType(404, Type = typeof(string))]
         public async Task<ActionResult<SuperHero>> Get(int id)
         {
             var hero = await _mediator.Send(new FindHeroByIdQuery(id));
@@ -46,7 +49,7 @@ namespace TestApp.Controllers
         /// <response code="400">If ModelState is invalid</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(400, Type = typeof(ValidationProblemDetails))]
         public async Task<ActionResult<List<SuperHero>>> Post(AddHeroModel hero)
         {
             if (ModelState.IsValid)
@@ -57,7 +60,7 @@ namespace TestApp.Controllers
                 return new ObjectResult(heroes) { StatusCode = StatusCodes.Status201Created };
             }
                 
-            return BadRequest("ModelState is invalid");
+            return BadRequest();
         }
 
         /// <returns>Heroes with updated hero</returns>
@@ -65,7 +68,7 @@ namespace TestApp.Controllers
         /// <response code="404">If hero not found</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(404, Type = typeof(string))]
         public async Task<ActionResult<List<SuperHero>>> Put(UpdateHeroModel request)
         {
             var result = await _mediator.Send(new UpdateHeroCommand(request));
@@ -85,7 +88,7 @@ namespace TestApp.Controllers
         /// <response code="404">If hero not found</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(404, Type = typeof(string))]
         public async Task<ActionResult<List<SuperHero>>> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteHeroCommand(id));
