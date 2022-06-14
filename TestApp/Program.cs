@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using TestApp.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,10 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 // Add services to the container.
-builder.Services.AddControllers()
+builder.Services.AddControllers(options =>
+    {
+        options.Filters.Add(typeof(LastVisitFilter));
+    })
     .AddFluentValidation(options =>
     {
         options.ImplicitlyValidateChildProperties = true;
