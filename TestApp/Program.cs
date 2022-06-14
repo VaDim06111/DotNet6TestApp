@@ -1,9 +1,16 @@
+using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using TestApp.Configuration;
 using TestApp.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add Autofac
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+    builder.RegisterModule(new RegisterModule()));
 
 // Add Serilog
 Log.Logger = new LoggerConfiguration()

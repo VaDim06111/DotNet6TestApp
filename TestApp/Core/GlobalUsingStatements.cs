@@ -5,4 +5,5 @@ global using TestApp.Data;
 global using TestApp.CQRS.Queries;
 global using TestApp.CQRS.Commands;
 global using Serilog;
+global using Autofac;
 global using FluentValidation;

@@ -32,7 +32,7 @@ namespace TestApp.Controllers
         [ProducesResponseType(404, Type = typeof(string))]
         public async Task<ActionResult<SuperHero>> Get(int id)
         {
-            var hero = await _mediator.Send(new FindHeroByIdQuery(id));
+            var hero = await _mediator.Send(new GetHeroByIdQuery(id));
             if (hero == null)
             {
                 Log.Warning($"Get hero by id: {id} action was failed. Hero not found");
@@ -51,15 +51,10 @@ namespace TestApp.Controllers
         [ProducesResponseType(400, Type = typeof(ValidationProblemDetails))]
         public async Task<ActionResult<List<SuperHero>>> Post(AddHeroModel hero)
         {
-            if (ModelState.IsValid)
-            {
-                var heroes = await _mediator.Send(new AddHeroCommand(hero));
+            var heroes = await _mediator.Send(new AddHeroCommand(hero));
 
-                Log.Information($"Add hero by id: {hero.Id} action was succeeded");
-                return new ObjectResult(heroes) { StatusCode = StatusCodes.Status201Created };
-            }
-                
-            return BadRequest();
+            Log.Information($"Add hero by id: {hero.Id} action was succeeded");
+            return new ObjectResult(heroes) { StatusCode = StatusCodes.Status201Created };
         }
 
         /// <returns>Heroes with updated hero</returns>
