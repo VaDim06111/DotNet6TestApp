@@ -1,15 +1,15 @@
 ﻿namespace TestApp.CQRS.Queries
 {
-    public class FindHeroByIdQuery : IRequest<SuperHero>
+    public class GetHeroByIdQuery : IRequest<SuperHero>
     {
         public int Id { get; }
 
-        public FindHeroByIdQuery(int id)
+        public GetHeroByIdQuery(int id)
         {
             Id = id;
         }
 
-        public class FindHeroByIdHandler : IRequestHandler<FindHeroByIdQuery, SuperHero>
+        public class FindHeroByIdHandler : IRequestHandler<GetHeroByIdQuery, SuperHero>
         {
             private readonly DataContext _context;
 
@@ -18,7 +18,7 @@
                 _context = context;
             }
 
-            public async Task<SuperHero> Handle(FindHeroByIdQuery request, CancellationToken cancellationToken)
+            public async Task<SuperHero> Handle(GetHeroByIdQuery request, CancellationToken cancellationToken)
             {
                 Log.Information($"Get SuperHero with id: {request.Id} from database");
                 return await _context.SuperHeroes
