@@ -2,7 +2,7 @@
 
 namespace TestApp.Filters
 {
-    [AttributeUsage(AttributeTargets.All)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class LastVisitFilter : Attribute, IResourceFilter
     {
         public void OnResourceExecuting(ResourceExecutingContext context)

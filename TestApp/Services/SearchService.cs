@@ -14,7 +14,7 @@ namespace TestApp.Services
         public async Task<List<SuperHero>> Search(SearchModel model)
         {
             var heroes = new List<SuperHero>();
-
+      
             switch (model.Key)
             {
                 case "id":

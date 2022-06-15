@@ -12,6 +12,9 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     builder.RegisterModule(new RegisterModule()));
 
+// Add AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 // Add Serilog
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -27,7 +30,7 @@ builder.Services.AddControllers(options =>
     })
     .AddFluentValidation(options =>
     {
-        options.ImplicitlyValidateChildProperties = true;
+        options.ImplicitlyValidateChildProperties = true; 
         options.ImplicitlyValidateRootCollectionElements = true;
         options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     });
