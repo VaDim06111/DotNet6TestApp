@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TestApp.Controllers
 {
@@ -49,7 +50,7 @@ namespace TestApp.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(400, Type = typeof(ValidationProblemDetails))]
-        public async Task<ActionResult<List<SuperHero>>> Post(AddHeroModel hero)
+        public async Task<ActionResult<List<SuperHero>>> Post(SuperHero hero)
         {
             var heroes = await _mediator.Send(new AddHeroCommand(hero));
 
@@ -63,7 +64,7 @@ namespace TestApp.Controllers
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(404, Type = typeof(string))]
-        public async Task<ActionResult<List<SuperHero>>> Put(UpdateHeroModel request)
+        public async Task<ActionResult<List<SuperHero>>> Put([CustomizeValidator(Properties="Name,FirstName,LastName,Place")] SuperHero request)
         {
             var result = await _mediator.Send(new UpdateHeroCommand(request));
 

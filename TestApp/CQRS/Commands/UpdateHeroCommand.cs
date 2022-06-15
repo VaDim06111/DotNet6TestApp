@@ -1,4 +1,6 @@
-﻿namespace TestApp.CQRS.Commands
+﻿using AutoMapper;
+
+namespace TestApp.CQRS.Commands
 {
     public class UpdateHeroCommand : IRequest<bool>
     {
@@ -6,16 +8,18 @@
 
         public UpdateHeroCommand(SuperHero hero)
         {
-            Hero = hero;
+            Hero = hero;           
         }
 
         public class UpdateHeroHandler : IRequestHandler<UpdateHeroCommand, bool>
         {
             private readonly DataContext _context;
+            private readonly IMapper _mapper;
 
-            public UpdateHeroHandler(DataContext context)
+            public UpdateHeroHandler(DataContext context, IMapper mapper)
             {
                 _context = context;
+                _mapper = mapper;
             }
 
             public async Task<bool> Handle(UpdateHeroCommand request, CancellationToken cancellationToken)
@@ -24,14 +28,10 @@
 
                 if (dbHero != null)
                 {
-                    dbHero.FirstName = request.Hero.FirstName;
-                    dbHero.LastName = request.Hero.LastName;
-                    dbHero.Place = request.Hero.Place;
-
+                    _mapper.Map(request.Hero, dbHero);                  
                     await _context.SaveChangesAsync(cancellationToken);
 
                     Log.Information($"Update SuperHero with id: {request.Hero.Id} in database");
-
                     return true;
                 }
 
