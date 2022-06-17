@@ -34,14 +34,14 @@ namespace TestApp.Controllers
         public async Task<ActionResult<SuperHero>> Get(int id)
         {
             var hero = await _mediator.Send(new GetHeroByIdQuery(id));
-            if (hero == null)
+            if (hero != null)
             {
-                Log.Warning($"Get hero by id: {id} action was failed. Hero not found");
-                return NotFound("Hero not found");
+                Log.Information($"Get hero by id: {id} action was succeeded");
+                return Ok(hero);                
             }
 
-            Log.Information($"Get hero by id: {id} action was succeeded");
-            return Ok(hero);
+            Log.Warning($"Get hero by id: {id} action was failed. Hero not found");
+            return NotFound("Hero not found");
         }
 
         /// <returns>Heroes with newly created</returns>

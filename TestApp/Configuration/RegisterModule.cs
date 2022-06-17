@@ -9,6 +9,8 @@ namespace TestApp.Configuration
         {
             builder.RegisterType<SearchService>().As<ISearchService>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<EmailSenderService>().As<IEmailSenderService>()
+                .InstancePerLifetimeScope();
         }
     }
 }
