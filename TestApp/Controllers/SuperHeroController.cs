@@ -34,7 +34,7 @@ namespace TestApp.Controllers
         public async Task<ActionResult<SuperHero>> Get(int id)
         {
             var hero = await _mediator.Send(new GetHeroByIdQuery(id));
-            if (hero != null)
+            if (hero is not null)
             {
                 Log.Information($"Get hero by id: {id} action was succeeded");
                 return Ok(hero);                
@@ -55,7 +55,7 @@ namespace TestApp.Controllers
             var heroes = await _mediator.Send(new AddHeroCommand(hero));
 
             Log.Information($"Add hero by id: {hero.Id} action was succeeded");
-            return new ObjectResult(heroes) { StatusCode = StatusCodes.Status201Created };
+            return StatusCode(StatusCodes.Status201Created, heroes);
         }
 
         /// <returns>Heroes with updated hero</returns>
@@ -95,7 +95,7 @@ namespace TestApp.Controllers
             }
 
             Log.Warning($"Delete hero by id: {id} action was failed. Hero not found");
-            return NotFound("Hero not found");
+            return NotFound("Hero not found");           
         }
     }
 }
