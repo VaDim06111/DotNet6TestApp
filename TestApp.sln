@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{F15C567F-2527-4863-BF3D-73EE77E63D37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{F15C567F-2527-4863-BF3D-73EE77E63D37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspIdentityApp", "AspIdentityApp\AspIdentityApp.csproj", "{04465D36-FC31-49A6-AEE2-54FB1AB421D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F15C567F-2527-4863-BF3D-73EE77E63D37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F15C567F-2527-4863-BF3D-73EE77E63D37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F15C567F-2527-4863-BF3D-73EE77E63D37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04465D36-FC31-49A6-AEE2-54FB1AB421D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04465D36-FC31-49A6-AEE2-54FB1AB421D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04465D36-FC31-49A6-AEE2-54FB1AB421D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04465D36-FC31-49A6-AEE2-54FB1AB421D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

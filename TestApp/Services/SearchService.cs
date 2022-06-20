@@ -19,7 +19,7 @@ namespace TestApp.Services
             {
                 case "id":
                     var hero = await _mediator.Send(new GetHeroByIdQuery(int.Parse(model.Value)));
-                    if (hero != null)
+                    if (hero is not null)
                         heroes.Add(hero);
                     break;
                 case "name":
