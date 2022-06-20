@@ -1,7 +1,4 @@
-﻿using AspIdentityApp.Core;
-using Microsoft.AspNetCore.Identity;
-
-namespace AspIdentityApp.Services
+﻿namespace AspIdentityApp.Services
 {
     public class RoleInitializer
     {

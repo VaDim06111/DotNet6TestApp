@@ -1,5 +1,4 @@
-﻿using AspIdentityApp.Models;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace AspIdentityApp.Validators
 {
