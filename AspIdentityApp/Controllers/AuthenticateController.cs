@@ -1,6 +1,4 @@
-﻿using AspIdentityApp.Core;
-using AspIdentityApp.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AspIdentityApp.Controllers
 {

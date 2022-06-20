@@ -1,6 +1,4 @@
-﻿using AspIdentityApp.Core;
-using AspIdentityApp.Services;
-using Autofac;
+﻿using AspIdentityApp.Services;
 
 namespace AspIdentityApp.Configuration
 {

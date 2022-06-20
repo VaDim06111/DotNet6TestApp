@@ -1,6 +1,4 @@
-﻿using AspIdentityApp.Models;
-
-namespace AspIdentityApp.Core
+﻿namespace AspIdentityApp.Core
 {
     public interface IAuthService
     {

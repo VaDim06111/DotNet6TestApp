@@ -1,11 +1,5 @@
-﻿using AspIdentityApp.Core;
-using AspIdentityApp.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
-using Serilog;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace AspIdentityApp.Services
 {
