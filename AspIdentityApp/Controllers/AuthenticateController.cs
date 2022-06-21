@@ -27,7 +27,7 @@ namespace AspIdentityApp.Controllers
             var loginResult = await _authService.LoginAsync(model);
 
             if (loginResult is null)
-                return Unauthorized("User not found or password is wrong");
+                return Unauthorized("User not found or password is wrong");            
 
             return Ok(loginResult);
         }
