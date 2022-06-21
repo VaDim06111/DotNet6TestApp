@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AspIdentityApp.Controllers
 {
     [Route("api/home")]
-    [Authorize(Roles = "admin")]
     [ApiController]
     public class HomeController : ControllerBase
     {
